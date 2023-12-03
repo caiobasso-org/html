@@ -39,9 +39,9 @@ jobs:
 
     - name: Buildx inspect
       run: docker buildx inspect --bootstrap
-      
+
     - name: Buildx build
-      run: docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_REGISTRY }}/html/app:latest .
+      run: docker buildx build --push -t ${{ secrets.DOCKER_REGISTRY }}/html/app:latest .
 
     - name: Deploy with Docker Compose
       run: docker-compose up -d
