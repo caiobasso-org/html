@@ -41,7 +41,7 @@ jobs:
       run: docker buildx inspect --bootstrap
 
     - name: Buildx build
-      run: docker buildx build --push -t https://registry.feijoadaserver.com/html_app:latest .
+      run: docker buildx build --push -t localhost:5000/html_app:latest .
 
     - name: Deploy with Docker Compose
       run: docker-compose up -d
