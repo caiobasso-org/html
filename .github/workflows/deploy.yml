@@ -26,13 +26,19 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKER_USER }}/clockbox:latest
+    #- name: Build and push
+    #  uses: docker/build-push-action@v5
+    #  with:
+    #    context: .
+    #    file: ./Dockerfile
+    #    push: true
+    #   tags: ${{ secrets.DOCKER_USER }}/clockbox:latest
+
+    - name: Build and Push Docker Image
+        run: |
+          docker buildx create --use
+          docker buildx inspect --bootstrap
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_REGISTRY }}/html/app:latest .
 
     - name: Deploy with Docker Compose
       run: docker-compose up -d
