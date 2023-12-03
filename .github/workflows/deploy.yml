@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ${{ secrets.DOCKER_REGISTRY }}/app:latest
+        tags: ${{ secrets.DOCKER_REGISTRY }}/html/app
 
     - name: Deploy with Docker Compose
       run: docker-compose up -d
